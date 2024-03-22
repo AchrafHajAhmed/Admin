@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+  <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gérer les produits</title>
+        <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage-compat.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f0f0f0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            .container {
+                text-align: center;
+            }
+            .container form {
+                max-width: 400px;
+                margin: 0 auto;
+                padding: 50px;
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .container form label {
+                display: block;
+                margin-bottom: 10px;
+            }
+            .container form input[type="text"],
+            .container form input[type="number"],
+            .container form select,
+            .container form input[type="file"] {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 20px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+            .container form button {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                background-color: #007bff;
+                color: #fff;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            .container form button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+        <h2>Ajouter un nouveau produit</h2>
+        <form id="product-form">
+            <label for="name">Nom du produit</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="description">Description du produit</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+
+            <label for="price">Prix du produit</label>
+            <input type="number" id="price" name="price" step="0.01" required>
+
+            <label for="category">Catégorie du produit</label>
+            <select id="category" name="category" required></select>
+
+            <label for="image">Image du produit</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+
+            <button type="submit">Ajouter</button>
+        </form>
+    </div>
+
+    <script>
+        const firebaseConfig = {
+apiKey: "AIzaSyDHVW7r7Yg0QVfzBAutfq5U_6GqPiVCjCc",
+authDomain: "hanout-a372e.firebaseapp.com",
+databaseURL: "https://hanout-a372e-default-rtdb.firebaseio.com",
+projectId: "hanout-a372e",
+storageBucket: "hanout-a372e.appspot.com",
+messagingSenderId: "933084221712",
+appId: "1:933084221712:web:af1a7f1847b022a16a5595"
+};
+
+
+        firebase.initializeApp(firebaseConfig);
+        const firestore = firebase.firestore();
+        const storage = firebase.storage();
+
+        const loadCategories = () => {
+            const categoriesRef = firestore.collection('categories');
+            const categoriesDropdown = document.getElementById('category');
+
+            categoriesRef.get().then((snapshot) => {
+                snapshot.forEach((doc) => {
+                    const category = doc.data().name;
+                    const option = document.createElement('option');
+                    option.value = category;
+                    option.innerText = category;
+                    categoriesDropdown.appendChild(option);
+                });
+            }).catch((error) => {
+                console.error("Erreur lors de la récupération des catégories :", error);
+            });
+        };
+
+        window.addEventListener('load', () => {
+            loadCategories();
+        });
+
+        const productForm = document.getElementById('product-form');
+        productForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = productForm['name'].value;
+            const description = productForm['description'].value;
+            const price = parseFloat(productForm['price'].value);
+            const category = productForm['category'].value;
+            const image = productForm['image'].files[0];
+
+            const storageRef = storage.ref('product_images/' + image.name);
+            const uploadTask = storageRef.put(image);
+
+            uploadTask.on('state_changed',
+                (snapshot) => {
+                },
+                (error) => {
+                    console.error('Erreur lors du téléchargement de l\'image:', error);
+                },
+                () => {
+                    uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                        firestore.collection('products').add({
+                            name: name,
+                            description: description,
+                            price: price,
+                            category: category,
+                            imageUrl: downloadURL
+                        }).then((docRef) => {
+                            console.log('Produit ajouté avec succès avec l\'ID:', docRef.id);
+                            productForm.reset();
+                        }).catch((error) => {
+                            console.error('Erreur lors de l\'ajout du produit:', error);
+                        });
+                    });
+                }
+            );
+        });
+    </script>
+    </body>
+    </html>
