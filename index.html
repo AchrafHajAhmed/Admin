@@ -112,7 +112,7 @@ appId: "1:933084221712:web:af1a7f1847b022a16a5595"
       firebase.auth().signInWithEmailAndPassword(email, password)
           .then((userCredential) => {
               console.log('Utilisateur connecté !');
-              window.location.href = 'home.html';
+              window.location.href = 'acceuil.html';
           })
           .catch((error) => {
               console.error('Erreur de connexion :', error.message);
