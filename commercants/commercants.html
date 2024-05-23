@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des commerçants</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="comm.css">
+</head>
+<body>
+<div class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/acceuil.html">Hanout</a>
+    <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link" href="/utilisateur/utilisateur.html">Liste d'utilisateur</a>
+        <a class="nav-item nav-link" href="commercants.html">Liste des commerçants</a>
+        <a class="nav-item nav-link" href="../gerer_produits.html">Ajouter Produit</a>
+        <a class="nav-item nav-link btn btn-danger" href="/index.html" id="logoutButton">Logout</a>
+    </div>
+</div>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Liste des commerçants</h1>
+    <input type="text" id="searchInput" class="form-control mb-4" placeholder="Rechercher par nom, email, ou téléphone...">
+    <table id="merchantsTable" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Numéro de téléphone</th>
+            <th>Status</th>
+            <th>Action</th>
+            <th>Document</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-storage.js"></script>
+<script src="comm.js"></script>
+</body>
+</html>
+
+

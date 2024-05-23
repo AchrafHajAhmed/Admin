@@ -4,22 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Produits</title>
-    <!-- Ajout des styles Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <!-- Ajout du style personnalisé -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="acceuil.html">Hanout</a>
+    <a class="navbar-brand" href="/acceuil.html">Hanout</a>
     <div class="navbar-nav ml-auto">
-        <a class="nav-item nav-link" href="gerer_produits.html">Ajouter Produit</a>
-        <a class="nav-item nav-link btn btn-danger" href="index.html" id="logoutButton">Logout</a>
+        <a class="nav-item nav-link" href="/utilisateur/utilisateur.html">Liste d'utilisateur</a>
+        <a class="nav-item nav-link" href="/commercants/commercants.html">Liste des commerçants</a>
+        <a class="nav-item nav-link" href="/gerer_produits.html">Ajouter Produit</a>
+        <a class="nav-item nav-link btn btn-danger" href="/index.html" id="logoutButton">Logout</a>
     </div>
 </div>
 
 <div class="container mt-4">
-    <!-- Formulaire d'ajout de produit -->
     <form id="product-form">
         <div class="form-group">
             <label for="category">Catégorie:</label>
@@ -47,11 +46,9 @@
         </div>
         <button type="submit" class="btn btn-primary">Ajouter Produit</button>
     </form>
-    <!-- Zone pour afficher les messages de succès ou d'erreur -->
     <div id="success-message"></div>
 </div>
 
-<!-- Scripts requis -->
 <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-storage.js"></script>

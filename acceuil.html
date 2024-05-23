@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord Admin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/acceuil.html">Hanout</a>
+    <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link" href="/utilisateur/utilisateur.html">Liste d'utilisateur</a>
+        <a class="nav-item nav-link" href="/commercants/commercants.html">Liste des commerçants</a>
+        <a class="nav-item nav-link" href="/gerer_produits.html">Ajouter Produit</a>
+        <a class="nav-item nav-link btn btn-danger" href="/index.html" id="logoutButton">Logout</a>
+    </div>
+</div>
+
+
+<div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 60vh;">
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h2 class="font-weight-bold" id="usersCount">0</h2>
+                    <p>Utilisateurs</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h2 class="font-weight-bold" id="commercantsCount">0</h2>
+                    <p>Commerçants</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-info">
+                <div class="card-body">
+                    <h2 class="font-weight-bold" id="produitCount">0</h2>
+                    <p>Produits</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-warning">
+                <div class="card-body">
+                    <h2 class="font-weight-bold" id="ordersCount">0</h2>
+                    <p>Ordres</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4 d-flex justify-content-center align-items-center">
+    <canvas id="trafficChart" style="max-width: 600px;"></canvas>
+</div>
+
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
